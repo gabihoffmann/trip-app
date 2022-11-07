@@ -1,5 +1,5 @@
 import { AxiosConfig } from "../../../../configs/axios";
-import { DtoTripLocation } from "./types";
+import { DtoTripLocation } from "./types/dtoTripLocation";
 
 const locationUrl = "/v1/api/locations";
 
