@@ -38,7 +38,7 @@ export function SearchLocations() {
           <Typography variant="h5">Buscar</Typography>
         </Grid>
         <Grid item xs={12}>
-          <SearchFilters />
+          <SearchFilters onSubmit={(values) => service.search(values)} />
         </Grid>
       </Grid>
       {/* SearchResult */}
