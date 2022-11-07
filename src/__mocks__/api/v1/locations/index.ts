@@ -7,6 +7,23 @@ const locationsBaseUrl = "/v1/api/locations";
 export const getTripLocationsHandler = rest.get(
   locationsBaseUrl,
   (req, res, ctx) => {
+    const city = req.url.searchParams.get("city")?.toLocaleLowerCase();
+    const country = req.url.searchParams.get("country")?.toLocaleLowerCase();
+
+    if (city || country) {
+      const result = tripLocationDataSource.filter((item) => {
+        const containsCity =
+          item.city.toLocaleLowerCase().indexOf(city || "") > -1;
+        const containsCountry =
+          item.country.toLocaleLowerCase().indexOf(country || "") > -1;
+
+        return containsCountry && containsCity;
+      });
+      if (result) return res(ctx.json(result), ctx.status(200));
+
+      return res(ctx.json([]), ctx.status(404));
+    }
+
     return res(ctx.json(tripLocationDataSource), ctx.status(200));
   }
 );
