@@ -1,32 +1,33 @@
-import { AxiosConfig } from "../../../../configs/axios";
+// import { AxiosConfig } from "../../../../configs/axios";
+import Axios from "axios";
 import { DtoTripLocation } from "./types/dtoTripLocation";
 
 const locationUrl = "/v1/api/locations";
 
 export class LocationsService {
   static async list() {
-    const response = await AxiosConfig.get<DtoTripLocation[]>(locationUrl);
+    const response = await Axios.get<DtoTripLocation[]>(locationUrl);
     return response;
   }
   static async get(locationId: number) {
-    const response = await AxiosConfig.get<DtoTripLocation>(
+    const response = await Axios.get<DtoTripLocation>(
       `${locationUrl}/${locationId}`
     );
     return response;
   }
   static async create(dto: DtoTripLocation) {
-    const response = await AxiosConfig.post<DtoTripLocation>(locationUrl, dto);
+    const response = await Axios.post<DtoTripLocation>(locationUrl, dto);
     return response;
   }
   static async update(locationId: number, dto: DtoTripLocation) {
-    const response = await AxiosConfig.put<DtoTripLocation>(
+    const response = await Axios.put<DtoTripLocation>(
       `${locationUrl}/${locationId}`,
       dto
     );
     return response;
   }
   static async delete(locationId: number) {
-    const response = await AxiosConfig.delete(`${locationUrl}/${locationId}`);
+    const response = await Axios.delete(`${locationUrl}/${locationId}`);
     return response;
   }
 }
