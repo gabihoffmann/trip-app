@@ -1,12 +1,15 @@
 // import { AxiosConfig } from "../../../../configs/axios";
 import Axios from "axios";
+import { ListParams } from "./params";
 import { DtoTripLocation } from "./types/dtoTripLocation";
 
 const locationUrl = "/v1/api/locations";
 
 export class LocationsService {
-  static async list() {
-    const response = await Axios.get<DtoTripLocation[]>(locationUrl);
+  static async list(params: ListParams) {
+    const response = await Axios.get<DtoTripLocation[]>(locationUrl, {
+      params,
+    });
     return response;
   }
   static async get(locationId: number) {
