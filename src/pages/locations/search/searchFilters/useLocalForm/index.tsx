@@ -3,9 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LocalFormValues } from "./types";
 import { validationSchema } from "./validations";
 
-interface UseLocalFormProps {}
-
-export function useLocalForm(props?: UseLocalFormProps) {
+export function useLocalForm() {
   const form = useForm<LocalFormValues>({
     defaultValues: {
       city: "",

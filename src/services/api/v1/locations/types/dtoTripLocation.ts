@@ -1,5 +1,5 @@
 export interface DtoTripLocation {
-  id: number;
+  id?: number;
   city: string;
   country: string;
   hotelName?: string;

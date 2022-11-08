@@ -30,7 +30,7 @@ export function SearchFilters(props: SearchFiltersProps) {
               <TextField
                 type="text"
                 label="Cidade"
-                error={fieldState.invalid}
+                error={fieldState.error ? true : false}
                 helperText={fieldState.error?.message}
                 fullWidth
                 {...field}

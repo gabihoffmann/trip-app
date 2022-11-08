@@ -8,7 +8,7 @@ export const tripLocationFactory = Factory.define<DtoTripLocation>(
     city: faker.address.cityName(),
     country: faker.address.country(),
     hotelName: faker.company.bs(),
-    hotelPhone: faker.phone.number(),
+    hotelPhone: faker.phone.number("#########"),
     travelPlan: faker.lorem.sentence(),
   })
 );
