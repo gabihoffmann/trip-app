@@ -1,8 +1,14 @@
 import { Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export function LocationPage() {
+  const navigate = useNavigate();
+
   // ---------------------------------------------
   // Transformations
+  const handleNavigate = () => {
+    navigate("/locations");
+  };
   // ---------------------------------------------
   // Render
 
@@ -38,7 +44,9 @@ export function LocationPage() {
         justifyItems={"center"}
       >
         <Grid item xs={4} margin={"auto"}>
-          <Button variant="outlined">Cancelar</Button>
+          <Button variant="outlined" onClick={handleNavigate}>
+            Cancelar
+          </Button>
         </Grid>
         <Grid item xs={4} margin={"auto"}>
           <Button variant="outlined" color="error">

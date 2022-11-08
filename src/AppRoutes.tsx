@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { LocationPage } from "./pages/locations/location";
 import { SearchLocations } from "./pages/locations/search";
 import { NotFound } from "./pages/notfound";
@@ -19,6 +19,7 @@ export function AppRoutes() {
       </Route>
       {/* unknown routes */}
       <Route path="*" element={<NotFound />} />
+      <Route path="/" element={<Navigate to={"/locations"} />} />
     </Routes>
   );
 }
