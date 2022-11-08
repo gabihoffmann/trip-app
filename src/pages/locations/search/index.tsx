@@ -1,12 +1,17 @@
 import { Button, Container, Divider, Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { SearchFilters } from "./searchFilters";
 import { SearchResults } from "./searchResult";
 import { useLocationsService } from "./useLocationsService";
 
 export function SearchLocations() {
   const service = useLocationsService();
+  const navigate = useNavigate();
   // ---------------------------------------------
   // Transformations
+  const handleNavigateToFormPage = () => {
+    navigate("location");
+  };
   // ---------------------------------------------
   // Render
 
@@ -22,7 +27,9 @@ export function SearchLocations() {
           <Typography variant="h4">GabiTrip</Typography>
         </Grid>
         <Grid item xs>
-          <Button variant="contained">Adicionar</Button>
+          <Button variant="contained" onClick={handleNavigateToFormPage}>
+            Adicionar
+          </Button>
         </Grid>
       </Grid>
 
