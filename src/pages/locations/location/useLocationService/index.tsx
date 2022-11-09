@@ -32,9 +32,15 @@ export function useLocationService(props?: LocationServiceProps) {
       try {
         setLoading(true);
 
-        if (!props?.locationId)
+        if (props?.locationId) {
           // TODO: Não está aceitando o dto como um Partial
+          await LocationsService.update(
+            props?.locationId,
+            dto as DtoTripLocation
+          );
+        } else {
           await LocationsService.create(dto as DtoTripLocation);
+        }
       } catch (error) {
         console.error(error);
       } finally {
