@@ -9,8 +9,9 @@ export function SearchLocations() {
   const navigate = useNavigate();
   // ---------------------------------------------
   // Transformations
-  const handleNavigateToFormPage = () => {
-    navigate("location");
+  const handleNavigateToFormPage = (index?: number) => {
+    if (index) navigate(`location/${index}`);
+    else navigate("location");
   };
   // ---------------------------------------------
   // Render
@@ -27,7 +28,10 @@ export function SearchLocations() {
           <Typography variant="h4">GabiTrip</Typography>
         </Grid>
         <Grid item xs>
-          <Button variant="contained" onClick={handleNavigateToFormPage}>
+          <Button
+            variant="contained"
+            onClick={() => handleNavigateToFormPage()}
+          >
             Adicionar
           </Button>
         </Grid>
@@ -51,7 +55,12 @@ export function SearchLocations() {
       {/* SearchResult */}
       <Divider sx={{ m: "1rem" }} />
       {service.loading && <span>...carregando</span>}
-      {!service.loading && <SearchResults locations={service.locations} />}
+      {!service.loading && (
+        <SearchResults
+          locations={service.locations}
+          onSelect={(item: number) => handleNavigateToFormPage(item)}
+        />
+      )}
     </Container>
   );
 }

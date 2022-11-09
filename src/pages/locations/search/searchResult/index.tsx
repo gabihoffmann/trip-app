@@ -7,17 +7,15 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { DtoTripLocation } from "../../../../services/api/v1/locations/types/dtoTripLocation";
 
 interface SearchResultsProps {
   locations: DtoTripLocation[];
+  onSelect: (item: number) => void;
 }
 
 export function SearchResults(props: SearchResultsProps) {
   const { locations } = props;
-
-  const navigate = useNavigate();
 
   // ---------------------------------------------
   // Transformations
@@ -48,7 +46,7 @@ export function SearchResults(props: SearchResultsProps) {
               <TableCell align="right">
                 <Button
                   variant="text"
-                  onClick={() => navigate(`location/${location.id}`)}
+                  onClick={() => props.onSelect(location.id!)}
                 >
                   Editar
                 </Button>
