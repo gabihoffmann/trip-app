@@ -1,6 +1,7 @@
 import { ApiGateway } from "../../../../configs/axios/apiGateway";
 import { ListParams } from "./params";
 import { DtoTripLocation } from "./types/dtoTripLocation";
+import { DtoValidationError } from "./types/dtoValidationError";
 
 const locationUrl = "/locations";
 
@@ -18,7 +19,10 @@ export class LocationsService {
     return response;
   }
   static async create(dto: DtoTripLocation) {
-    const response = await ApiGateway.post<DtoTripLocation>(locationUrl, dto);
+    // TODO: no service uso o Dto do Error ??
+    const response = await ApiGateway.post<
+      DtoTripLocation | DtoValidationError
+    >(locationUrl, dto);
     return response;
   }
   static async update(locationId: number, dto: DtoTripLocation) {
