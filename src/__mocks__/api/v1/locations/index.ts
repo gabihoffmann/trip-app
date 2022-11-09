@@ -93,7 +93,8 @@ export const deleteTripLocationHandler = rest.delete(
         const removeIndex = tripLocationDataSource.findIndex(
           (item) => item.id! === locationId
         );
-        tripLocationDataSource.slice(removeIndex);
+
+        tripLocationDataSource.splice(removeIndex, 1);
 
         return res(ctx.status(204));
       } catch (e) {
