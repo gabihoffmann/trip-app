@@ -29,7 +29,7 @@ export function LocationPage() {
   };
 
   const handleSubmitLocation = (data: LocalFormValues) => {
-    service.save(data);
+    service.save(data, handleNavigate);
   };
   // ---------------------------------------------
   // Effects

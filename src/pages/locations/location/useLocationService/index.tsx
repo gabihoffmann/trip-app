@@ -26,7 +26,7 @@ export function useLocationService(props?: LocationServiceProps) {
   }, []);
 
   const save = useCallback(
-    async (values: LocalFormValues) => {
+    async (values: LocalFormValues, onSuccess: () => void) => {
       const dto = getDtoLocationTripFromFormValues(values, props?.locationId);
 
       try {
@@ -41,6 +41,8 @@ export function useLocationService(props?: LocationServiceProps) {
         } else {
           await LocationsService.create(dto as DtoTripLocation);
         }
+
+        onSuccess();
       } catch (error) {
         console.error(error);
       } finally {
