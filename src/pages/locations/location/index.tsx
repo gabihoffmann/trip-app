@@ -141,11 +141,17 @@ export function LocationPage() {
             Cancelar
           </Button>
         </Grid>
-        <Grid item xs={4} margin={"auto"}>
-          <Button variant="outlined" color="error">
-            Remover
-          </Button>
-        </Grid>
+        {service.location?.id && (
+          <Grid item xs={4} margin={"auto"}>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => service.remove(handleNavigate)}
+            >
+              Remover
+            </Button>
+          </Grid>
+        )}
         <Grid item xs={4}>
           <Button
             type="submit"

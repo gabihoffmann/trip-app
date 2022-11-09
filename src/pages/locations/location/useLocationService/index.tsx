@@ -41,7 +41,21 @@ export function useLocationService(props?: LocationServiceProps) {
         } else {
           await LocationsService.create(dto as DtoTripLocation);
         }
+        onSuccess();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [props?.locationId]
+  );
 
+  const remove = useCallback(
+    async (onSuccess: () => void) => {
+      try {
+        setLoading(true);
+        if (props?.locationId) await LocationsService.delete(props?.locationId);
         onSuccess();
       } catch (error) {
         console.error(error);
@@ -68,5 +82,6 @@ export function useLocationService(props?: LocationServiceProps) {
     loading,
     load,
     save,
+    remove,
   };
 }
