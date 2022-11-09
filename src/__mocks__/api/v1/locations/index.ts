@@ -1,6 +1,7 @@
 import { rest } from "msw";
 import { DtoTripLocation } from "../../../../services/api/v1/locations/types/dtoTripLocation";
 import { tripLocationDataSource } from "./dataSource";
+import { createLocationSchema } from "./validation";
 
 const locationsBaseUrl = "/v1/api/locations";
 
@@ -44,15 +45,20 @@ export const createTripLocationHandler = rest.post(
   locationsBaseUrl,
   (req, res, ctx) => {
     // TODO: pesquisar lib se body está depreciado
-    let body = req.body as Partial<DtoTripLocation>;
+    const body = req.body as Partial<DtoTripLocation>;
 
     try {
+      createLocationSchema.validateSync(body, {
+        abortEarly: false,
+      });
+
       body.id =
         1 + tripLocationDataSource[tripLocationDataSource.length - 1].id!;
       tripLocationDataSource.push(body as DtoTripLocation);
       return res(ctx.json(body), ctx.status(200));
     } catch (e: any) {
-      return res(ctx.status(422));
+      // TODO: inner >> como o yup agreega os erros de validação
+      return res(ctx.status(422), ctx.json(e.inner));
     }
   }
 );
