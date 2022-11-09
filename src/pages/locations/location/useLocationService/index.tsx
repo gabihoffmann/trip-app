@@ -1,6 +1,8 @@
+import { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { LocationsService } from "../../../../services/api/v1/locations";
 import { DtoTripLocation } from "../../../../services/api/v1/locations/types/dtoTripLocation";
+import { DtoValidationError } from "../../../../services/api/v1/locations/types/dtoValidationError";
 import { getDtoLocationTripFromFormValues } from "../helpers";
 import { LocalFormValues } from "../useLocalForm/types";
 
@@ -8,6 +10,7 @@ interface LocationServiceProps {
   locationId?: number;
 }
 
+//TODO: questinamento no uselocationservice o id via props no service - o load utiliza argumento na fn , save props ?
 export function useLocationService(props?: LocationServiceProps) {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState<DtoTripLocation>();
@@ -26,7 +29,11 @@ export function useLocationService(props?: LocationServiceProps) {
   }, []);
 
   const save = useCallback(
-    async (values: LocalFormValues, onSuccess: () => void) => {
+    async (
+      values: LocalFormValues,
+      onSuccess: () => void,
+      onValidateErrors: (errors: any) => void
+    ) => {
       const dto = getDtoLocationTripFromFormValues(values, props?.locationId);
 
       try {
@@ -42,8 +49,11 @@ export function useLocationService(props?: LocationServiceProps) {
           await LocationsService.create(dto as DtoTripLocation);
         }
         onSuccess();
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        const serviceErrors = error as AxiosError;
+        if (serviceErrors?.response?.status === 422) {
+          onValidateErrors(serviceErrors?.response?.data);
+        }
       } finally {
         setLoading(false);
       }

@@ -1,4 +1,5 @@
 import { DtoTripLocation } from "../../../services/api/v1/locations/types/dtoTripLocation";
+import { DtoValidationError } from "../../../services/api/v1/locations/types/dtoValidationError";
 import { LocalFormValues } from "./useLocalForm/types";
 
 export function getFormValuesFromDtoLocationTrip(dto: DtoTripLocation) {
@@ -30,4 +31,13 @@ export function getDtoLocationTripFromFormValues(
   };
 
   return dtoValues;
+}
+
+export function getLocalFormErrorsFromService(errors: DtoValidationError[]) {
+  const formErrors = errors.map((error) => ({
+    path: error.path,
+    message: error.errors.join(", "),
+  }));
+
+  return formErrors;
 }

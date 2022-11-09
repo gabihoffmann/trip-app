@@ -6,6 +6,7 @@ import { useLocalForm } from "./useLocalForm";
 import { useLocationService } from "./useLocationService";
 import { getFormValuesFromDtoLocationTrip } from "./helpers";
 import { LocalFormValues } from "./useLocalForm/types";
+import { DtoValidationError } from "../../../services/api/v1/locations/types/dtoValidationError";
 
 export function LocationPage() {
   // router-dom
@@ -28,8 +29,12 @@ export function LocationPage() {
     navigate("/locations");
   };
 
+  const handleFormErrors = (errors: DtoValidationError[]) => {
+    form.setValidationErrors(errors);
+  };
+
   const handleSubmitLocation = (data: LocalFormValues) => {
-    service.save(data, handleNavigate);
+    service.save(data, handleNavigate, handleFormErrors);
   };
   // ---------------------------------------------
   // Effects
