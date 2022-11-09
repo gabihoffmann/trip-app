@@ -65,22 +65,21 @@ export const updateTripLocationHandler = rest.put(
       const locationIndex = tripLocationDataSource.findIndex(
         (item) => item.id! === locationId
       );
-      let location = tripLocationDataSource.find(
-        (item) => item.id! === locationId
-      );
+      let location = tripLocationDataSource[locationIndex];
 
       if (location) {
         try {
-          const body = req.json();
+          let body = req.body as DtoTripLocation;
           location = { ...location, ...body };
           tripLocationDataSource[locationIndex] = location;
+          return res(ctx.status(200), ctx.json(location));
         } catch (e: any) {
           return res(ctx.status(422));
         }
       }
     }
 
-    return res(ctx.status(404));
+    return res(ctx.status(404), ctx.json("errou aqui"));
   }
 );
 
