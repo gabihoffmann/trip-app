@@ -47,7 +47,8 @@ export const createTripLocationHandler = rest.post(
     let body = req.body as Partial<DtoTripLocation>;
 
     try {
-      body.id = tripLocationDataSource.length + 1;
+      body.id =
+        1 + tripLocationDataSource[tripLocationDataSource.length - 1].id!;
       tripLocationDataSource.push(body as DtoTripLocation);
       return res(ctx.json(body), ctx.status(200));
     } catch (e: any) {
