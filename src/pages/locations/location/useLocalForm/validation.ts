@@ -7,12 +7,9 @@ export const validationSchema = Yup.object({
   travel: Yup.string(),
   hotel: Yup.object({
     name: Yup.string(),
-    // TODO: validation only numbers ??
-    phone: Yup.string()
-      .nullable(true)
-      .min(9, "Minimo 9 digitos")
-      .default(undefined),
-  })
-    .notRequired()
-    .default(undefined),
+    phone: Yup.string().test({
+      test: (value) => (value?.length || 0) > 9 || value?.length === 0,
+      message: "minimo 9 digitos ",
+    }),
+  }).notRequired(),
 });
