@@ -19,10 +19,8 @@ export class LocationsService {
     return response;
   }
   static async create(dto: DtoTripLocation) {
-    // TODO: no service uso o Dto do Error ??
-    const response = await ApiGateway.post<
-      DtoTripLocation | DtoValidationError
-    >(locationUrl, dto);
+    //no service uso o Dto do Error ?? não precisa o proposito do serviço é consumir os dados
+    const response = await ApiGateway.post<DtoTripLocation>(locationUrl, dto);
     return response;
   }
   static async update(locationId: number, dto: DtoTripLocation) {
