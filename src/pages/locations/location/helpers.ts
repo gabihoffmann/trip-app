@@ -20,8 +20,8 @@ export function getDtoLocationTripFromFormValues(
   values: LocalFormValues,
   locationId: number | undefined
 ) {
-  let dtoValues: Partial<DtoTripLocation> = {
-    // TODO: what means
+  let dtoValues: DtoTripLocation = {
+    //injeção condicional de propriedade dentro do objeto
     ...(locationId && { id: locationId }),
     city: values.city,
     country: values.country,
