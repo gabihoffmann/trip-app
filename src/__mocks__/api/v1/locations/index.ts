@@ -10,7 +10,12 @@ export const getTripLocationsHandler = rest.get(
   (req, res, ctx) => {
     const city = req.url.searchParams.get("city")?.toLocaleLowerCase();
     const country = req.url.searchParams.get("country")?.toLocaleLowerCase();
+    const pageParam =
+      req.url.searchParams.get("page")?.toLocaleLowerCase() || "";
+    const perPageParam =
+      req.url.searchParams.get("per_page")?.toLocaleLowerCase() || "";
 
+    // search
     const result = tripLocationDataSource.filter((item) => {
       const containsCity =
         item.city.toLocaleLowerCase().indexOf(city || "") > -1;
@@ -18,7 +23,27 @@ export const getTripLocationsHandler = rest.get(
         item.country.toLocaleLowerCase().indexOf(country || "") > -1;
       return containsCountry && containsCity;
     });
-    return res(ctx.json(result), ctx.status(200));
+
+    // pagination
+    const page = pageParam ? Math.max(parseInt(pageParam), 1) : 1;
+    const per_page = perPageParam ? Math.max(parseInt(perPageParam), 10) : 10;
+
+    const initialIndex = (page - 1) * per_page;
+    const finalIndex = initialIndex + per_page;
+    const paginatedResult = result.slice(initialIndex, finalIndex);
+
+    // response
+    return res(
+      ctx.json({
+        pagination: {
+          page,
+          per_page,
+          total_items: result.length,
+        },
+        data: paginatedResult,
+      }),
+      ctx.status(200)
+    );
   }
 );
 
