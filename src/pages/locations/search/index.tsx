@@ -49,7 +49,7 @@ export function SearchLocations() {
           <Typography variant="h5">Buscar</Typography>
         </Grid>
         <Grid item xs={12}>
-          <SearchFilters onSubmit={(values) => service.search(values)} />
+          <SearchFilters onSubmit={service.setFilters} />
         </Grid>
       </Grid>
       {/* SearchResult */}
