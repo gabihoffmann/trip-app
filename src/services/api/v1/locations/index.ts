@@ -1,4 +1,5 @@
 import { ApiGateway } from "../../../../configs/axios/apiGateway";
+import { DtoServiceResult } from "../../../types/dtoServicesResult";
 import { ListParams } from "./params";
 import { DtoTripLocation } from "./types/dtoTripLocation";
 import { DtoValidationError } from "./types/dtoValidationError";
@@ -7,9 +8,12 @@ const locationUrl = "/locations";
 
 export class LocationsService {
   static async list(params: ListParams) {
-    const response = await ApiGateway.get<DtoTripLocation[]>(locationUrl, {
-      params,
-    });
+    const response = await ApiGateway.get<DtoServiceResult<DtoTripLocation>>(
+      locationUrl,
+      {
+        params,
+      }
+    );
     return response;
   }
   static async get(locationId: number) {
