@@ -14,7 +14,7 @@ export class LocationsService {
         params,
       }
     );
-    return response;
+    return response.data;
   }
   static async get(locationId: number) {
     const response = await ApiGateway.get<DtoTripLocation>(

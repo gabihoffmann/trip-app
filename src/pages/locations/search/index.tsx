@@ -57,8 +57,9 @@ export function SearchLocations() {
       {service.loading && <span>...carregando</span>}
       {!service.loading && (
         <SearchResults
-          locations={service.locations}
+          items={service.locations}
           onSelect={(item: number) => handleNavigateToFormPage(item)}
+          onPageChange={service.setPage}
         />
       )}
     </Container>
