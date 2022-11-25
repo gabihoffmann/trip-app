@@ -1,5 +1,6 @@
 import {
   Button,
+  Grid,
   Pagination,
   Table,
   TableBody,
@@ -68,11 +69,19 @@ export function SearchResults(props: SearchResultsProps) {
       </TableContainer>
 
       {totalPages && (
-        <Pagination
-          count={totalPages}
-          page={items?.pagination.page}
-          onChange={(evt, page) => props.onPageChange(page)}
-        />
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ m: "1rem" }}
+        >
+          <Pagination
+            count={totalPages}
+            page={items?.pagination.page}
+            onChange={(evt, page) => props.onPageChange(page)}
+          />
+        </Grid>
       )}
     </>
   );
