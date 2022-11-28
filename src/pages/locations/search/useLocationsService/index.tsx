@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { LocationsService } from "../../../../services/api/v1/locations";
 import { DtoTripLocation } from "../../../../services/api/v1/locations/types/dtoTripLocation";
-import {
-  DtoPagination,
-  DtoServiceResult,
-} from "../../../../services/types/dtoServicesResult";
+import { DtoServiceResult } from "../../../../services/types/dtoServicesResult";
 import { LocalFormValues } from "../searchFilters/useLocalForm/types";
 import {
   paginationInitialValues,

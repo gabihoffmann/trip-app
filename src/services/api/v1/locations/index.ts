@@ -2,7 +2,6 @@ import { ApiGateway } from "../../../../configs/axios/apiGateway";
 import { DtoServiceResult } from "../../../types/dtoServicesResult";
 import { ListParams } from "./params";
 import { DtoTripLocation } from "./types/dtoTripLocation";
-import { DtoValidationError } from "./types/dtoValidationError";
 
 const locationUrl = "/locations";
 

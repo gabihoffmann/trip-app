@@ -2,7 +2,6 @@ import { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { LocationsService } from "../../../../services/api/v1/locations";
 import { DtoTripLocation } from "../../../../services/api/v1/locations/types/dtoTripLocation";
-import { DtoValidationError } from "../../../../services/api/v1/locations/types/dtoValidationError";
 import { getDtoLocationTripFromFormValues } from "../helpers";
 import { LocalFormValues } from "../useLocalForm/types";
 
