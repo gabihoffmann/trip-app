@@ -26,7 +26,7 @@ export const getTripLocationsHandler = rest.get(
 
     // pagination
     const page = pageParam ? Math.max(parseInt(pageParam), 1) : 1;
-    const per_page = perPageParam ? Math.max(parseInt(perPageParam), 10) : 10;
+    const per_page = perPageParam ? Math.max(parseInt(perPageParam), 2) : 10;
 
     const initialIndex = (page - 1) * per_page;
     const finalIndex = initialIndex + per_page;

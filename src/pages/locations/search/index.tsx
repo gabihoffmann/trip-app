@@ -60,6 +60,7 @@ export function SearchLocations() {
           items={service.locations}
           onSelect={(item: number) => handleNavigateToFormPage(item)}
           onPageChange={service.setPage}
+          onPerPageChange={service.setPerPage}
         />
       )}
     </Container>

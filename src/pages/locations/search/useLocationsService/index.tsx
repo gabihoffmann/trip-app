@@ -37,6 +37,18 @@ export function useLocationsService() {
     }));
   }, []);
 
+  const setPerPage = useCallback((per_page: number) => {
+    if (per_page && per_page !== 0) {
+      setParams((prev) => ({
+        ...prev,
+        pagination: {
+          ...prev.pagination,
+          per_page,
+        },
+      }));
+    }
+  }, []);
+
   const search = useCallback(async (params: SearchParams) => {
     try {
       setLoading(true);
@@ -69,5 +81,6 @@ export function useLocationsService() {
     loading,
     setFilters,
     setPage,
+    setPerPage,
   };
 }

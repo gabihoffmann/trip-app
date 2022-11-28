@@ -1,7 +1,11 @@
 import {
   Button,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   Pagination,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -14,10 +18,9 @@ import { DtoServiceResult } from "../../../../services/types/dtoServicesResult";
 
 interface SearchResultsProps {
   items?: DtoServiceResult<DtoTripLocation>;
-
   onPageChange: (page: number) => void;
-
   onSelect: (item: number) => void;
+  onPerPageChange: (per_page: number) => void;
 }
 
 export function SearchResults(props: SearchResultsProps) {
@@ -45,7 +48,28 @@ export function SearchResults(props: SearchResultsProps) {
               <TableCell sx={{ fontWeight: "bold" }} align="left">
                 Pais
               </TableCell>
-              <TableCell></TableCell>
+              <TableCell>
+                <>
+                  <FormControl fullWidth>
+                    <InputLabel id="select_per_page">
+                      Itens por página
+                    </InputLabel>
+                    <Select
+                      labelId="select_per_page"
+                      label={"Itens por página"}
+                      value={items?.pagination?.per_page}
+                      onChange={(value) =>
+                        props.onPerPageChange(Number(value?.target.value || 0))
+                      }
+                    >
+                      <MenuItem value={2}>02</MenuItem>
+                      <MenuItem value={5}>05</MenuItem>
+                      <MenuItem value={10}>10</MenuItem>
+                      <MenuItem value={20}>20</MenuItem>
+                    </Select>
+                  </FormControl>
+                </>
+              </TableCell>
             </TableRow>
           </TableHead>
           {/* body */}
